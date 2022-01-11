@@ -145,6 +145,7 @@ class TextHighlighter(object):
     def replace_token(self, text_tokens, y, n_gram_word_list):
         txt = ' '.join(text_tokens[y:y + len(n_gram_word_list[0].split(' '))])
 
-        new_expression = txt.replace(re.sub('[!",:.;?()]$|^[!",:.;?()]|\W["!,:.;?()]', '',  txt), self.highlight_pre + n_gram_word_list[0] + self.highlight_post)
+        #modifying the replacement: transform keyphrase "negative pressure rooms" to negativepressurerooms.
+        new_expression = txt.replace(re.sub('[!",:.;?()]$|^[!",:.;?()]|\W["!,:.;?()]', '',  txt), self.highlight_pre + ''.join(n_gram_word_list[0].split(' ')) + self.highlight_post)
         y += len(n_gram_word_list[0].split(' '))
         return y, new_expression
